@@ -20,6 +20,14 @@ body {
     font-size: 120%;
 }
 
+.continueButton {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-top: 4px;
+}
+
 #nextStep {
     background-color: #4CAF50;
     color: white;
@@ -28,13 +36,26 @@ body {
     margin-top: 4px;
 }
 
-#lastUserInput {
+.textInput {
     font-size: 18px;
     color: #5F9EA0;
 }
 
+.textArea {
+    font-size: 18px;
+}
+
 #textArea {
     font-size: 18px;
+}
+
+.responseArea {
+  display: none; 
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  width: 350px;
+  margin-left: 20px;
+  height: 210px;
 }
 
 #questionBox {

@@ -14,16 +14,27 @@
         <div id="player" style="display:none"></div>
       </div>
       
-      <div id="questionBox">
+      <div class="responseArea" id="questionBox">
 
         <div id=prompt>Please write a <b>question</b> about what is happening, what happened, or what will happen in the video.</div>
 
 
-        <div id=lastUserInput></div>
+        <div  class="textInput" id=lastUserInput></div>
 
         <br><textarea rows=4 cols=50 id=textArea placeholder="Write Question"></textarea>
 
         <br><button id=nextStep onclick=myFunction()>Submit</button>
+      </div>
+      
+      <div class="responseArea" id="responseBox">
+
+        <div id="responsePrompt">Please Answer This Question: </div>
+
+        <div id="givenResponseAnswer"></div>
+
+        <br><textarea class="textArea" rows=4 cols=50 id="responseTextArea" placeholder="Answer the question."></textarea>
+
+        <br><button class="continueButton" id="responseNextStep" onclick=advanceResponse()>Submit</button>
       </div>
     </div>
 

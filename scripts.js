@@ -1,6 +1,5 @@
 var TOTAL_VIDEO_LENGTH = 300; // seconds
 var QUESTION_START = 10; 
-var ANSWER_START = 140; 
 
 var tag = document.createElement('script');
 var vidID = "2ouhoxXkmkc"; 
@@ -13,6 +12,10 @@ var Answer1;
 var Answer2;
 var finalAnswer; 
 var state = 1;
+
+var RESPONSE_START = 13; 
+var responseQuestion = "What is the color of Mr. Bean's jacket?";
+var responseAnswer = "Mr. Bean's Jacket is Olive or Dark Green."; 
 
 var player;
 var videoReady = false; 
@@ -38,7 +41,7 @@ function onPlayerReady(event) {
       playElem.style.display="block"; // showPlayer();
     }
 
-    event.target.playVideo();
+    player.playVideo();
     videoReady = true; 
 }
 
@@ -55,16 +58,19 @@ function draw() {
 
 var questionStarted = false; 
 var questionFinished = false; 
-var answerStarted = false; 
-var answerFinished = false; 
+var responseStarted = false; 
+var responseFinished = false; 
 function checkPosition() {  
     var currentTime = player.getCurrentTime();
-    if (currentTime > QUESTION_START && currentTime < QUESTION_START + 1 && !questionStarted) {
+    if (currentTime > QUESTION_START && !questionStarted) {
         runQuestion(); 
-    } else if (currentTime > ANSWER_START && currentTime < ANSWER_START + 1 && !answerStarted) {
-        runAnswer(); 
-    } if (questionStarted && !questionFinished && (currentTime>QUESTION_START)) {
+    } else if (questionStarted && !questionFinished && (currentTime>QUESTION_START)) {
       player.seekTo(QUESTION_START); 
+      player.pauseVideo();
+    } else if (currentTime > RESPONSE_START && !responseStarted) {
+        runResponse(); 
+    } else if (responseStarted && !responseFinished && (currentTime>RESPONSE_START)) {
+      player.seekTo(RESPONSE_START); 
       player.pauseVideo();
     }
 }
@@ -82,17 +88,23 @@ function endQuestion() {
   player.playVideo(); 
 }
 
-function runAnswer() {
-  answerStarted = true;
-  console.log("ANSWER"); 
+function runResponse() {
+  responseStarted = true;
   player.pauseVideo();
+  document.getElementById("responsePrompt").innerHTML = "Please answer this question: " + responseQuestion;
+  document.getElementById("responseBox").style.display = "flex"; 
+}
+
+function endResponse() {
+  responseFinished = true; 
+  document.getElementById("responseBox").style.display = "none";
+  player.playVideo(); 
 }
 
 function countWords(str) {
   var words = str.trim().split(/\s+/).length;
   return words; 
 }
-
 
 function myFunction() {
     var textArea = document.getElementById("textArea");
@@ -130,7 +142,7 @@ function myFunction() {
             lastUserInput.innerHTML = "your answer: " + Answer1;  
             textArea.value = "";
             textArea.placeholder = "Write your elaborated answer here";
-            state = state + 1;          
+            state = state + 1;     
         }
 
     } else if (state === 3) {     // the user is asked if they want to elaborate on their answer
@@ -146,6 +158,7 @@ function myFunction() {
         }
         textArea.value = "";
         textArea.placeholder = ""; 
+        textArea.style.display = "none";
         nextStepButton.innerHTML="Continue watching video";
         state = state+1;
     } else if (state === 4) {
@@ -154,6 +167,28 @@ function myFunction() {
        
 }       
 
+var responseState = 1;
+function advanceResponse() {
+  var responseText = document.getElementById("responseTextArea").value;
+  var userText = responseText.trim();
+  var numWords = countWords(userText);
+  var lastChar = userText.slice(-1);
+  
+  if (responseState === 1) {
 
-//player.seekTo(QUIZ2_CORRECT); 
-//player.playVideo();
+      if (userText.length < 10) {
+        alert("Answers must be at least 10 characters long");
+      } else if (numWords < 4) {
+        alert("Answers must be at least 4 words long");
+      } else {
+        responseState = 2;
+        document.getElementById("responsePrompt").innerHTML = "Compare your answer, to the given answer below."
+        document.getElementById("givenResponseAnswer").innerHTML = responseAnswer; 
+        document.getElementById("responseNextStep").innerHTML = "Continue Watching Video";
+        document.getElementById("responseTextArea").style.display = "none"; 
+      }
+  } else if (responseState === 2) {
+    responseState = 3; 
+    endResponse(); 
+  }
+}       
