@@ -19,6 +19,8 @@ var responseAnswer = "Mr. Bean's Jacket is Olive or Dark Green.";
 
 var player;
 var videoReady = false; 
+setupQuestions(); 
+
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
       height: '360',
@@ -31,9 +33,58 @@ function onYouTubeIframeAPIReady() {
       }
     });
 }
+var allQuestions = [];
+var allAnswers = [];
+var allTimestamps = [];
 
+function checkResponses() {
+  if ((allQuestions.length>0) && (allAnswers.length>0) && (allTimestamps.length>0)) {
+    "We're in!"
+    var index = Math.floor(Math.random()*allQuestions.length);
+    if (index === 0) {
+      index = 1; 
+    }
+    responseQuestion = allQuestions[index]; 
+    responseAnswer = allAnswers[index]; 
+    RESPONSE_START = allTimestamps[index]; 
+  } else {
+    console.log("not ready"); 
+  }
+}
+
+function pickResponses() {
+  // Pick Response
+  getColumn("question", function (questions) {
+    allQuestions = questions; 
+    console.log("qs retrieved");
+    checkResponses();
+  });
+  getColumn("answer", function (answers) {
+    allAnswers = answers; 
+    console.log("as retrieved");
+    checkResponses();
+  });
+  getColumn("videoTimestamp", function (ts) {
+    allTimestamps = ts; 
+    console.log("ts retrieved");
+    checkResponses();
+
+  });
+  console.log("called"); 
+}
+
+function setupQuestions() {
+  var buffer = 10;
+  var totalTime = 240; 
+  QUESTION_START = buffer+Math.floor(Math.random()*(totalTime-buffer)); // Pick a question start time. 
+  console.log("Q START" + QUESTION_START)
+  
+  pickResponses();
+}
 function onPlayerReady(event) {
     var playElem = document.getElementById('player');
+  
+    
   
     if (playElem.src.indexOf("&controls=0") === -1) {
 //      playElem.src += "&controls=0"; // remove controls
@@ -85,6 +136,7 @@ function runQuestion() {
 function endQuestion() {
   questionFinished = true; 
   document.getElementById("questionBox").style.display = "none"; 
+  postToSheet(String(QUESTION_START), UserQuestion, finalAnswer);
   player.playVideo(); 
 }
 
@@ -151,7 +203,7 @@ function myFunction() {
         
         if (Answer2 === "") {
             finalAnswer = Answer1; 
-            userQuestion.innerHTML = "your answer: " + finalAnswer;
+            lastUserInput.innerHTML = "your answer: " + finalAnswer;
         } else {
             finalAnswer = Answer1 + " " + Answer2;
             lastUserInput.innerHTML = "your updated answer: " + finalAnswer; 
