@@ -191,10 +191,10 @@ function myFunction() {
             alert("Answers must be at least 4 words long");
         } else {
             Answer1 = textArea.value;
-            prompt.innerHTML = "Finally, can you add to your answer? (optional)";
-            lastUserInput.innerHTML = "your answer: " + Answer1;  
+            prompt.innerHTML = "Finally, can you add a new sentence to your answer? (optional)";
+            lastUserInput.innerHTML = "Your answer: " + Answer1 + " (Your New Sentence)";  
             textArea.value = "";
-            textArea.placeholder = "Write your elaborated answer here";
+            textArea.placeholder = "Write your new sentence here.";
             state = state + 1;     
         }
 
@@ -204,10 +204,10 @@ function myFunction() {
         
         if (Answer2 === "") {
             finalAnswer = Answer1; 
-            lastUserInput.innerHTML = "your answer: " + finalAnswer;
+            lastUserInput.innerHTML = "Your answer: " + finalAnswer;
         } else {
             finalAnswer = Answer1 + " " + Answer2;
-            lastUserInput.innerHTML = "your updated answer: " + finalAnswer; 
+            lastUserInput.innerHTML = "Your updated answer: " + finalAnswer;
         }
         textArea.value = "";
         textArea.placeholder = ""; 
