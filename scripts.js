@@ -74,7 +74,7 @@ function pickResponses() {
 }
 
 function setupQuestions() {
-  var buffer = 10;
+  var buffer = 15;
   var totalTime = 240; 
   QUESTION_START = buffer+Math.floor(Math.random()*(totalTime-buffer)); // Pick a question start time. 
   console.log("Q START" + QUESTION_START)
@@ -236,7 +236,8 @@ function advanceResponse() {
       } else {
         responseState = 2;
         document.getElementById("responsePrompt").innerHTML = "Compare your answer, to the given answer below."
-        document.getElementById("givenResponseAnswer").innerHTML = responseAnswer; 
+        document.getElementById("yourResponse").innerHTML = "<b>Your Answer:</b> " + responseText; 
+        document.getElementById("givenResponseAnswer").innerHTML = "<b>Example Answer:</b> " + responseAnswer; 
         document.getElementById("responseNextStep").innerHTML = "Continue Watching Video";
         document.getElementById("responseTextArea").style.display = "none"; 
       }

@@ -6,13 +6,19 @@ body {
   display: flex;
   flex-direction: column; 
 }
-
+#title {
+  display: block; 
+}
 #content {
+  width: 80%; 
+  margin:0 auto;
+  float: clear; 
+}
+
+#innerHold {
   display: flex; 
   flex-direction: row;
   flex-wrap: wrap; 
-  width: 80%; 
-  margin:0 auto;
 }
 
 #prompt {

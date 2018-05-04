@@ -10,33 +10,39 @@
   <body>
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
 
-    <h2> Asking questions with Mr. Bean</h2>
     <div id="content">
-      <div id="vidHolder" style="">
-        <div id="player" style="display:none"></div>
+      <div id="title">
+        <h2> Asking questions with Mr. Bean</h2>
+        <h4> Watch the video below and pay attention to what Mr. Bean is doing! At some point in the video you'll be asked to <br><br>1. Make a question that you'd ask another student. <br>2. Answer a question that was asked by another student.<br><br>Do your best to give clear, concise responses in full sentences!</h4>
       </div>
-      
-      <div class="responseArea" id="questionBox">
+      <div id="innerHold">
+        <div id="vidHolder" style="">
+          <div id="player" style="display:none"></div>
+        </div>
 
-        <div id=prompt>Please write a <b>question</b> about what is happening, what happened, or what will happen in the video.</div>
+        <div class="responseArea" id="questionBox">
+
+          <div id=prompt>Please write a <b>question</b> about what is happening, or what already happened in the video.</div>
 
 
-        <div  class="textInput" id=lastUserInput></div>
+          <div  class="textInput" id=lastUserInput></div>
 
-        <br><textarea rows=4 cols=50 id=textArea placeholder="Write Question"></textarea>
+          <br><textarea rows=4 cols=50 id=textArea placeholder="Write Question"></textarea>
 
-        <br><button id=nextStep onclick=myFunction()>Submit</button>
-      </div>
-      
-      <div class="responseArea" id="responseBox">
+          <br><button id=nextStep onclick=myFunction()>Submit</button>
+        </div>
 
-        <div id="responsePrompt">Please Answer This Question: </div>
+        <div class="responseArea" id="responseBox">
 
-        <div id="givenResponseAnswer"></div>
+          <div id="responsePrompt">Please Answer This Question: </div>
 
-        <br><textarea class="textArea" rows=4 cols=50 id="responseTextArea" placeholder="Answer the question."></textarea>
+          <div id="givenResponseAnswer"></div>
+          <div id="yourResponse"></div>
 
-        <br><button class="continueButton" id="responseNextStep" onclick=advanceResponse()>Submit</button>
+          <br><textarea class="textArea" rows=4 cols=50 id="responseTextArea" placeholder="Answer the question."></textarea>
+
+          <br><button class="continueButton" id="responseNextStep" onclick=advanceResponse()>Submit</button>
+        </div>
       </div>
     </div>
 
