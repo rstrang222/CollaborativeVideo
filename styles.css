@@ -1,0 +1,47 @@
+body {
+  background-color: #bbbbbb;
+}
+
+#vidHolder {
+  display: flex;
+  flex-direction: column; 
+}
+
+#content {
+  display: flex; 
+  flex-direction: row;
+  flex-wrap: wrap; 
+  width: 80%; 
+  margin:0 auto;
+}
+
+#prompt {
+    font-family: Helvetica, sans-serif;
+    font-size: 120%;
+}
+
+#nextStep {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-top: 4px;
+}
+
+#lastUserInput {
+    font-size: 18px;
+    color: #5F9EA0;
+}
+
+#textArea {
+    font-size: 18px;
+}
+
+#questionBox {
+  display: none; 
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  width: 350px;
+  margin-left: 20px;
+  height: 210px;
+}

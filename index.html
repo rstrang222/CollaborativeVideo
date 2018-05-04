@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+  </head>
+  <body>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+
+    <h2> Asking questions with Mr. Bean</h2>
+    <div id="content">
+      <div id="vidHolder" style="">
+        <div id="player" style="display:none"></div>
+      </div>
+      
+      <div id="questionBox">
+
+        <div id=prompt>Please write a <b>question</b> about what is happening, what happened, or what will happen in the video.</div>
+
+
+        <div id=lastUserInput></div>
+
+        <br><textarea rows=4 cols=50 id=textArea placeholder="Write Question"></textarea>
+
+        <br><button id=nextStep onclick=myFunction()>Submit</button>
+      </div>
+    </div>
+
+</body>
+</html>
