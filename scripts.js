@@ -180,6 +180,7 @@ function myFunction() {
             textArea.placeholder = "Write your answer here";
             prompt.innerHTML = "Next, please write an answer to your question.";
             state = state + 1;
+            UserQuestion = UserText;
         }
     }
     else if (state === 2) {     // the user is asked to write an answer to their question
